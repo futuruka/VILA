@@ -2,6 +2,7 @@ import os
 import re
 import torch
 import pathlib
+import typing
 from dataclasses import dataclass
 from transformers import PretrainedConfig, PreTrainedModel
 from transformers.integrations.deepspeed import is_deepspeed_zero3_enabled
@@ -35,7 +36,7 @@ def is_local(model_name_or_path: str) -> bool:
 
 def get_checkpoint_path(
     output_dir: str, checkpoint_prefix: str = "checkpoint"
-) -> str | None:
+) -> typing.Union[str, None]:
     output_dir = os.path.abspath(output_dir)
     pathlib_dir = pathlib.Path(output_dir)
 
